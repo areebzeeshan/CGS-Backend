@@ -44,7 +44,7 @@ const login = async (req, res) => {
       const accessToken = await auth.createToken(salesUser._id);
       return res.status(200).json({
         success: true,
-        data: [{ accessToken }],
+        data: { accessToken },
         message: ["successfully logged in"],
       });
     }

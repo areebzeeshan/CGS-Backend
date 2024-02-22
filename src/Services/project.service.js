@@ -1,4 +1,6 @@
 const Project = require("../Models/projects.model");
+// import { uploadOnCloudinary } from "../Helper/cloudinary";
+const {uploadOnCloudinary} = require('../Helper/cloudinary');
 
 class ProjectService {
   async submit(req) {
@@ -16,8 +18,15 @@ class ProjectService {
         amount,
         clientName,
         description,
-        attachments,
       } = req.body;
+      
+      // Assuming you are using multer for file upload and the file is available in req.file
+      const { path } = req.file;
+
+      // Upload the file to Cloudinary
+      const cloudinaryResponse = await uploadOnCloudinary(path);
+
+      // Once the file is uploaded, construct the project object with the Cloudinary URL
       const project = new Project({
         id: id,
         title: title,
@@ -31,16 +40,19 @@ class ProjectService {
         amount: amount,
         clientName: clientName,
         description: description,
-        attachments: attachments,
+        attachments: cloudinaryResponse.url, // Use the Cloudinary URL here
       });
+
+      // Save the project to the database
       await project.save();
+
       return project;
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  async getProjects () {
+  async getProjects() {
     try {
       const response = await Project.find();
       return response;

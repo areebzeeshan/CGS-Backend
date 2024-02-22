@@ -7,9 +7,10 @@ const employeeRoutes = require("./Routes/employee.routes");
 const empHistoryRoutes = require("./Routes/empHistory.routes");
 const projNatureRoute = require("./Routes/projNature.routes");
 const testFunc = require("./Routes/test.routes");
-const salesUserRoutes = require('./Routes/salesUser.routes')
-const productionUserRoutes = require('./Routes/productionuser.routes');
+const salesUserRoutes = require("./Routes/salesUser.routes");
+const productionUserRoutes = require("./Routes/productionuser.routes");
 const projectRoutes = require("./Routes/project.routes");
+const upload = require("./Middlewares/multer.middlewares");
 
 app.use(cors());
 app.use(express.json());
@@ -29,6 +30,6 @@ app.use("/api/employee", employeeRoutes);
 
 app.use("/dropdown", projNatureRoute);
 
-app.use("/api/projects", projectRoutes);
+app.use("/api/projects", upload.single("file"), projectRoutes);
 
 module.exports = app;

@@ -1,5 +1,6 @@
 const ProductionUserService = require("../Services/prodUser.service");
 var productionUserService = new ProductionUserService();
+const auth = require("../Middlewares/auth");
 
 const signup = async (req, res) => {
   try {
@@ -39,9 +40,10 @@ const login = async (req, res) => {
   try {
     const response = await productionUserService.login(req);
     if (response) {
+      const accessToken = await auth.createToken(response._id);
       return res.status(200).json({
         success: true,
-        data: [response],
+        data: { accessToken },
         message: ["User created successfully"],
       });
     }

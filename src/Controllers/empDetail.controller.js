@@ -1,8 +1,8 @@
 const EmployeeService = require("../Services/employee.service");
 var employeeService = new EmployeeService();
 
-const testFunc = (req, res) => {
-  res.send("Test api is running.........");
+const testFunc = () => {
+  console.log("Test api is running.........");
 };
 
 const submit = async (req, res) => {

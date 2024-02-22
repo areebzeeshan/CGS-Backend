@@ -38,10 +38,10 @@ const login = async (req, res) => {
   try {
     const user = await userService.login(req);
     if (user) {
-      const accesstToken = await auth.createToken(user._id);
+      const accessToken = await auth.createToken(user._id);
       return res.status(200).json({
         success: true,
-        data: [{ accesstToken }],
+        data: { accessToken }, 
         message: ["successfully logged in"],
       });
     }
@@ -58,5 +58,6 @@ const login = async (req, res) => {
     })
   }
 };
+
 
 module.exports = { signup, login };
