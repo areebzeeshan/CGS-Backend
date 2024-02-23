@@ -2,6 +2,7 @@ const ProjectService = require("../Services/project.service");
 const projectService = new ProjectService();
 
 const submit = async (req, res) => {
+  console.log("project controller request : ", req);
   try {
     const response = await projectService.submit(req);
     if (response) {
@@ -29,20 +30,20 @@ const submit = async (req, res) => {
 const getProjects = async (req, res) => {
   try {
     const response = await projectService.getProjects();
-    if(response) {
+    if (response) {
       return res.status(200).json({
         success: true,
         data: [response],
-        message: ["Projects fetched successfully"]
-      })
+        message: ["Projects fetched successfully"],
+      });
     }
   } catch (error) {
     return res.status(500).json({
       success: false,
       data: [],
-      message: [error.message]
-    })
+      message: [error.message],
+    });
   }
-}
+};
 
 module.exports = { submit, getProjects };

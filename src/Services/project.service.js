@@ -4,7 +4,6 @@ const { uploadOnCloudinary } = require("../Helper/cloudinary");
 class ProjectService {
   async submit(req) {
     try {
-      console.log(req.attachments);
       const {
         id,
         title,
@@ -20,27 +19,25 @@ class ProjectService {
         description,
       } = req.body;
 
-      // Assuming you are using multer for file upload and the file is available in req.file
-      const { path } = req.file;
+      // Assuming attachments is an array of files, we will handle each file separately
+      const attachments = req.file; // get the file from request
 
-      // Upload the file to Cloudinary
-      const cloudinaryResponse = await uploadOnCloudinary(path);
+      const uploadedAttachmentUrl = await uploadOnCloudinary(attachments.path);
 
-      // Once the file is uploaded, construct the project object with the Cloudinary URL
       const project = new Project({
-        id: id,
-        title: title,
-        startDate: startDate,
-        deleiveryDate: deleiveryDate,
-        platform: platform,
-        department: department,
-        nature: nature,
-        profile: profile,
-        salesPerson: salesPerson,
-        amount: amount,
-        clientName: clientName,
-        description: description,
-        attachments: cloudinaryResponse.url, // Use the Cloudinary URL here
+        id,
+        title,
+        startDate,
+        deleiveryDate,
+        platform,
+        department,
+        nature,
+        profile,
+        salesPerson,
+        amount,
+        clientName,
+        description,
+        attachments: uploadedAttachmentUrl, // Assign uploaded attachment URL
       });
 
       // Save the project to the database
@@ -48,7 +45,7 @@ class ProjectService {
 
       return project;
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -57,7 +54,7 @@ class ProjectService {
       const response = await Project.find();
       return response;
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 }
