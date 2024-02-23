@@ -1,10 +1,10 @@
 const Project = require("../Models/projects.model");
-// import { uploadOnCloudinary } from "../Helper/cloudinary";
-const {uploadOnCloudinary} = require('../Helper/cloudinary');
+const { uploadOnCloudinary } = require("../Helper/cloudinary");
 
 class ProjectService {
   async submit(req) {
     try {
+      console.log(req.attachments);
       const {
         id,
         title,
@@ -19,7 +19,7 @@ class ProjectService {
         clientName,
         description,
       } = req.body;
-      
+
       // Assuming you are using multer for file upload and the file is available in req.file
       const { path } = req.file;
 
