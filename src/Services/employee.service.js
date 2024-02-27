@@ -1,5 +1,4 @@
 const Employee = require("../Models/employee.model");
-const employeeHistory = require("../Models/employeeHistory.models");
 
 class EmployeeService {
   async submit(req) {
@@ -50,35 +49,35 @@ class EmployeeService {
     }
   }
 
-  async employeeHistory(req) {
-    try {
-      const { department, designation, StartDate, EndDate, salary, shift } =
-        req.body;
-      const employee_history = new employeeHistory({
-        department: department,
-        designation: designation,
-        StartDate: StartDate,
-        EndDate: EndDate,
-        salary: salary,
-        shift: shift,
-      });
-      await employee_history.save();
+  // async employeeHistory(req) {
+  //   try {
+  //     const { department, designation, StartDate, EndDate, salary, shift } =
+  //       req.body;
+  //     const employee_history = new employeeHistory({
+  //       department: department,
+  //       designation: designation,
+  //       StartDate: StartDate,
+  //       EndDate: EndDate,
+  //       salary: salary,
+  //       shift: shift,
+  //     });
+  //     await employee_history.save();
 
-      return employee_history;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
+  //     return employee_history;
+  //   } catch (error) {
+  //     throw new Error(error);
+  //   }
+  // }
 
-  async getEmployeeHistory() {
-    try {
-      const empistData = await employeeHistory.find();
+  // async getEmployeeHistory() {
+  //   try {
+  //     const empistData = await employeeHistory.find();
 
-      return empistData;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
+  //     return empistData;
+  //   } catch (error) {
+  //     throw new Error(error);
+  //   }
+  // }
 
   async getEmployeeData(req) {
     try {
@@ -93,8 +92,16 @@ class EmployeeService {
   async addRecord(req) {
     try {
       const { id } = req.params;
-      const { department, designation, StartDate, EndDate, salary, shift } =
-        req.body;
+      const {
+        department,
+        designation,
+        StartDate,
+        EndDate,
+        salary,
+        shift,
+        bank,
+        accountNumber,
+      } = req.body;
       const employee_history = await Employee.findOneAndUpdate(
         { id: id },
         {
@@ -106,6 +113,8 @@ class EmployeeService {
               EndDate,
               salary,
               shift,
+              bank,
+              accountNumber,
             },
           },
         },

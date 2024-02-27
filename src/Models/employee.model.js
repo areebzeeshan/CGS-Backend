@@ -25,6 +25,14 @@ const employeeHistorySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    bank: {
+      type: String, 
+      required: true,
+    },
+    accountNumber: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
@@ -32,8 +40,7 @@ const employeeHistorySchema = new mongoose.Schema(
 const employeeSchema = new mongoose.Schema(
   {
     id: {
-      type: String,
-      unique: true,
+      type: Number,
       required: true,
     },
     name: {
