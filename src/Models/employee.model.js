@@ -15,8 +15,7 @@ const employeeHistorySchema = new mongoose.Schema(
       required: true,
     },
     EndDate: {
-      type: String,
-      required: true,
+      type: String
     },
     salary: {
       type: Number,
@@ -62,8 +61,7 @@ const employeeSchema = new mongoose.Schema(
       required: true,
     },
     reference: {
-      type: String,
-      required: true,
+      type: String
     },
     address: {
       type: String,
@@ -71,7 +69,6 @@ const employeeSchema = new mongoose.Schema(
     },
     emergencyPhone: {
       type: Number,
-      required: true,
     },
     username: {
       type: String,
