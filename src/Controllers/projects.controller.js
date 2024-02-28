@@ -2,7 +2,6 @@ const ProjectService = require("../Services/project.service");
 const projectService = new ProjectService();
 
 const submit = async (req, res) => {
-  console.log("project controller request : ", req);
   try {
     const response = await projectService.submit(req);
     if (response) {

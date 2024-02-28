@@ -32,6 +32,6 @@ app.use("/api/employee", employeeRoutes);
 
 app.use("/dropdown", projNatureRoute);
 
-app.use("/api/projects", upload.single("attachments"), projectRoutes);
+app.use("/api/projects", projectRoutes);
 
 module.exports = app;

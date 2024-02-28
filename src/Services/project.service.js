@@ -21,6 +21,7 @@ class ProjectService {
 
       // Assuming attachments is an array of files, we will handle each file separately
       const attachments = req.file; // get the file from request
+      console.log("request......",req.file)
 
       const uploadedAttachmentUrl = await uploadOnCloudinary(attachments.path);
 
