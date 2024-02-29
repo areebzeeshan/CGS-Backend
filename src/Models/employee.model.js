@@ -40,7 +40,7 @@ const employeeHistorySchema = new mongoose.Schema(
 const employeeSchema = new mongoose.Schema(
   {
     id: {
-      type: Number,
+      type: String,
       required: true,
     },
     name: {
@@ -68,7 +68,8 @@ const employeeSchema = new mongoose.Schema(
       required: true,
     },
     reference: {
-      type: String
+      type: String,
+      required: true
     },
     address: {
       type: String,
@@ -76,6 +77,7 @@ const employeeSchema = new mongoose.Schema(
     },
     emergencyPhone: {
       type: Number,
+      required: true
     },
     username: {
       type: String,

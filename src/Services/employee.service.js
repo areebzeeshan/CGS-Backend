@@ -1,4 +1,5 @@
 const Employee = require("../Models/employee.model");
+const { Types } = require('mongoose');
 
 class EmployeeService {
   async submit(req) {
@@ -122,6 +123,42 @@ class EmployeeService {
       );
       await employee_history.save();
       return employee_history;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async updateEmployee(req) {
+    try {
+      const { id } = req.params;
+      const objectId = Types.ObjectId.isValid(id) ? new Types.ObjectId(id) : id;
+      const updatedData = req.body;
+
+      const allowedFields = {
+        name: updatedData.name,
+        joiningDate: updatedData.joiningDate,
+        fathersName: updatedData.fathersName,
+        cnic: updatedData.cnic,
+        email: updatedData.email,
+        phone: updatedData.phone,
+        reference: updatedData.reference,
+        address: updatedData.address,
+        emergencyPhone: updatedData.emergencyPhone,
+        username: updatedData.username,
+        password: updatedData.password,
+      };
+
+      const updatedEmployee = await Employee.findByIdAndUpdate(
+        objectId,
+        allowedFields,
+        { new: true }
+      );
+
+      if (!updatedEmployee) {
+        throw new Error("Employee not found");
+      }
+
+      return updatedEmployee;
     } catch (error) {
       throw new Error(error);
     }

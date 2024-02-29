@@ -143,6 +143,25 @@ const addRecord = async (req, res) => {
   }
 };
 
+const updateEmployee = async (req, res) => {
+  try {
+    const update_employee = await employeeService.updateEmployee(req);
+    if (update_employee) {
+      return res.status(200).json({
+        success: true,
+        data: [update_employee],
+        message: ["Employee updated successfully"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
 module.exports = {
   submit,
   fetchingFormData,
@@ -151,4 +170,5 @@ module.exports = {
   getEmployeeData,
   testFunc,
   addRecord,
+  updateEmployee,
 };

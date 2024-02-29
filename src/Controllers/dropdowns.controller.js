@@ -76,15 +76,72 @@ const addDepartment = async (req, res) => {
   }
 };
 
-const getProjectNature = async (req, res) => {
+const addShift = async (req, res) => {
   try {
-    const response = await dropdowns.getProjectNature();
-    if(response) {
+    const response = await dropdowns.shift(req);
+    if (response) {
       return res.status(200).json({
         success: true,
         data: [response],
-        message: ["Prject Nature fetched successfully"]
-      })
+        message: ["Shift posted successfully"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
+const addBank = async (req, res) => {
+  try {
+    const response = await dropdowns.bank(req);
+    if (response) {
+      return res.status(200).json({
+        success: true,
+        data: [response],
+        message: ["Bank posted successfully"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
+const addDesignation = async (req, res) => {
+  try {
+    const response = await dropdowns.designation(req);
+    if (response) {
+      return res.status(200).json({
+        success: true,
+        data: [response],
+        message: ["Designation posted successfully"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
+const getProjectNature = async (req, res) => {
+  try {
+    const response = await dropdowns.getProjectNature();
+    if (response) {
+      return res.status(200).json({
+        success: true,
+        data: [response],
+        message: ["Prject Nature fetched successfully"],
+      });
     }
   } catch (error) {
     return res.status(500).json({
@@ -98,12 +155,12 @@ const getProjectNature = async (req, res) => {
 const getPlatform = async (req, res) => {
   try {
     const response = await dropdowns.getPlatform();
-    if(response) {
+    if (response) {
       return res.status(200).json({
         success: true,
         data: [response],
-        message: ["Platform fetched successfully"]
-      })
+        message: ["Platform fetched successfully"],
+      });
     }
   } catch (error) {
     return res.status(500).json({
@@ -117,12 +174,69 @@ const getPlatform = async (req, res) => {
 const getDepartment = async (req, res) => {
   try {
     const response = await dropdowns.getDepartment();
-    if(response) {
+    if (response) {
       return res.status(200).json({
         success: true,
         data: [response],
-        message: ["Department fetched successfully"]
-      })
+        message: ["Department fetched successfully"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
+const getShift = async (req, res) => {
+  try {
+    const response = await dropdowns.getShift();
+    if (response) {
+      return res.status(200).json({
+        success: true,
+        data: [response],
+        message: ["Shift fetched successfully"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
+const getDesignation = async (req, res) => {
+  try {
+    const response = await dropdowns.getDesignation();
+    if (response) {
+      return res.status(200).json({
+        success: true,
+        data: [response],
+        message: ["Designation fetched successfully"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
+const getBank = async (req, res) => {
+  try {
+    const response = await dropdowns.getBank();
+    if (response) {
+      return res.status(200).json({
+        success: true,
+        data: [response],
+        message: ["Bank fetched successfully"],
+      });
     }
   } catch (error) {
     return res.status(500).json({
@@ -140,4 +254,10 @@ module.exports = {
   getProjectNature,
   getPlatform,
   getDepartment,
+  addShift,
+  getShift,
+  addDesignation,
+  getDesignation,
+  addBank, 
+  getBank
 };

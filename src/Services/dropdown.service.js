@@ -1,6 +1,9 @@
 const departmentModel = require("../Models/department.models");
 const platformModel = require("../Models/platform.models");
 const ProjNatureModel = require("../Models/projNature.models");
+const shiftModel = require("../Models/shift.models");
+const designationModel = require("../Models/designation.models");
+const bankModel = require('../Models/bank.models');
 
 class Dropdowns {
   async projectNature(req) {
@@ -26,7 +29,7 @@ class Dropdowns {
       const add_platform = new platformModel({
         id: id,
         label: label,
-        value: value
+        value: value,
       });
       await add_platform.save();
 
@@ -42,11 +45,59 @@ class Dropdowns {
       const add_department = new departmentModel({
         id: id,
         label: label,
-        value: value
+        value: value,
       });
       await add_department.save();
 
       return add_department;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async shift(req) {
+    try {
+      const { id, label, value } = req.body;
+      const add_shift = new shiftModel({
+        id: id,
+        label: label,
+        value: value,
+      });
+      await add_shift.save();
+
+      return add_shift;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async designation(req) {
+    try {
+      const { id, label, value } = req.body;
+      const add_designation = new designationModel({
+        id: id,
+        label: label,
+        value: value,
+      });
+      await add_designation.save();
+
+      return add_designation;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async designation(req) {
+    try {
+      const { id, label, value } = req.body;
+      const add_bank = new bankModel({
+        id: id,
+        label: label,
+        value: value,
+      });
+      await add_bank.save();
+
+      return add_bank;
     } catch (error) {
       throw new Error(error);
     }
@@ -74,6 +125,33 @@ class Dropdowns {
     try {
       const getDepart = await departmentModel.find();
       return getDepart;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async getShift() {
+    try {
+      const getShift = await shiftModel.find();
+      return getShift;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async getDesignation() {
+    try {
+      const getShift = await designationModel.find();
+      return getShift;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async getBank() {
+    try {
+      const getShift = await bankModel.find();
+      return getShift;
     } catch (error) {
       throw new Error(error);
     }
