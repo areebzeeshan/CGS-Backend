@@ -89,7 +89,6 @@ class EmployeeService {
       throw new Error(error);
     }
   }
-  
 
   async addRecord(req) {
     try {
@@ -132,7 +131,6 @@ class EmployeeService {
   async updateEmployee(req) {
     try {
       const { id } = req.params;
-      const objectId = Types.ObjectId.isValid(id) ? new Types.ObjectId(id) : id;
       const updatedData = req.body;
 
       const allowedFields = {
@@ -149,8 +147,8 @@ class EmployeeService {
         password: updatedData.password,
       };
 
-      const updatedEmployee = await Employee.findByIdAndUpdate(
-        objectId,
+      const updatedEmployee = await Employee.findOneAndUpdate(
+        { id }, // Use id field for comparison
         allowedFields,
         { new: true }
       );
