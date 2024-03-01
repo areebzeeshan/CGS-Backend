@@ -141,8 +141,8 @@ class Dropdowns {
 
   async getDesignation() {
     try {
-      const getShift = await designationModel.find();
-      return getShift;
+      const getDesignation = await designationModel.find();
+      return getDesignation;
     } catch (error) {
       throw new Error(error);
     }
