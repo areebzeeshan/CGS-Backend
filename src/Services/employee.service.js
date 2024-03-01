@@ -1,5 +1,5 @@
 const Employee = require("../Models/employee.model");
-const { Types } = require('mongoose');
+const { Types } = require("mongoose");
 
 class EmployeeService {
   async submit(req) {
@@ -83,12 +83,13 @@ class EmployeeService {
   async getEmployeeData(req) {
     try {
       const { id } = req.params;
-      const employees = await Employee.findOne({ id: id });
-      return employees;
+      const employee = await Employee.findOne({ id: id });
+      return employee;
     } catch (error) {
       throw new Error(error);
     }
   }
+  
 
   async addRecord(req) {
     try {

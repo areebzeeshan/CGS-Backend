@@ -40,7 +40,7 @@ const employeeHistorySchema = new mongoose.Schema(
 const employeeSchema = new mongoose.Schema(
   {
     id: {
-      type: String,
+      type: Number,
       required: true,
     },
     name: {
