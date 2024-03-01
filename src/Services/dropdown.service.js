@@ -87,7 +87,7 @@ class Dropdowns {
     }
   }
 
-  async designation(req) {
+  async bank(req) {
     try {
       const { id, label, value } = req.body;
       const add_bank = new bankModel({
