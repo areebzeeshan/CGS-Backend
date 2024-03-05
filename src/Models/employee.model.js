@@ -10,13 +10,6 @@ const employeeHistorySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    StartDate: {
-      type: String,
-      required: true,
-    },
-    EndDate: {
-      type: String
-    },
     salary: {
       type: Number,
       required: true,
@@ -48,8 +41,11 @@ const employeeSchema = new mongoose.Schema(
       required: true,
     },
     joiningDate: {
-      type: Date,
+      type: String,
       required: true,
+    },
+    EndDate: {
+      type: String
     },
     fathersName: {
       type: String,

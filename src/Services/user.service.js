@@ -35,6 +35,19 @@ class UserService {
       throw new Error(error);
     }
   }
+
+  async deleteUser(req) {
+    try {
+      const { username } = req.params;
+      const deletedUser = await User.findOneAndDelete({ username: username });
+      if (!deletedUser) {
+        throw new Error("User not found");
+      }
+      return deletedUser;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = UserService;

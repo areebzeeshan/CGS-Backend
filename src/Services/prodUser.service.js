@@ -31,6 +31,21 @@ class ProductionUserService {
         throw new Error(error);
     }
   }
+
+  async deleteProductionUser(req) {
+    try {
+      const { username } = req.params;
+      const deletedProdUser = await ProductionUser.findOneAndDelete({
+        username: username,
+      });
+      if (!deletedProdUser) {
+        throw new Error("User not found");
+      }
+      return deletedProdUser;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = ProductionUserService;

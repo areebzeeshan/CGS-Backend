@@ -162,6 +162,25 @@ const updateEmployee = async (req, res) => {
   }
 };
 
+const deleteEmployee = async (req, res) => {
+  try {
+    // const { id } = req.params;
+    const delete_employee = await employeeService.deleteEmployee(req);
+    if (delete_employee) {
+      return res.status(200).json({
+        success: true,
+        message: ["Employee deleted successfully"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
 module.exports = {
   submit,
   fetchingFormData,
@@ -171,4 +190,5 @@ module.exports = {
   testFunc,
   addRecord,
   updateEmployee,
+  deleteEmployee,
 };

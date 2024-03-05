@@ -63,4 +63,23 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signup, login };
+const deleteSalesUser = async (req, res) => {
+  try {
+    const delete_sales_user = await salesUserService.deleteSalesUser(req);
+    if (delete_sales_user) {
+      return res.status(200).json({
+        success: true,
+        message: ["successfully deleted"],
+      });
+    }
+    return delete_sales_user;
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message]
+    })
+  }
+};
+
+module.exports = { signup, login, deleteSalesUser };

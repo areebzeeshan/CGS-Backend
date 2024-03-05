@@ -22,13 +22,31 @@ class SalesUserService {
     try {
       const { username, password } = req.body;
       const sales_user = await SalesUser.findOne({ username });
-      if(sales_user && (await helperService.comparePassword(password, sales_user.password))){
+      if (
+        sales_user &&
+        (await helperService.comparePassword(password, sales_user.password))
+      ) {
         return sales_user;
       }
 
       return false;
     } catch (error) {
-        throw new Error(error);
+      throw new Error(error);
+    }
+  }
+
+  async deleteSalesUser(req) {
+    try {
+      const { username } = req.params;
+      const deletedSalesUser = await SalesUser.findOneAndDelete({
+        username: username,
+      });
+      if (!deletedSalesUser) {
+        throw new Error("User not found");
+      }
+      return deletedSalesUser;
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }

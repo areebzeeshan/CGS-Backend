@@ -59,5 +59,23 @@ const login = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  try {
+    const delete_user = await userService.deleteUser(req);
+    if (delete_user) {
+      return res.status(200).json({
+        success: true,
+        message: ["successfully deleted"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message]
+    })
+  }
+};
 
-module.exports = { signup, login };
+
+module.exports = { signup, login, deleteUser };

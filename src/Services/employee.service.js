@@ -8,6 +8,7 @@ class EmployeeService {
         id,
         name,
         joiningDate,
+        EndDate,
         fathersName,
         cnic,
         email,
@@ -23,6 +24,7 @@ class EmployeeService {
         id: id,
         name: name,
         joiningDate: joiningDate,
+        EndDate: EndDate,
         fathersName: fathersName,
         cnic: cnic,
         email: email,
@@ -93,16 +95,8 @@ class EmployeeService {
   async addRecord(req) {
     try {
       const { id } = req.params;
-      const {
-        department,
-        designation,
-        StartDate,
-        EndDate,
-        salary,
-        shift,
-        bank,
-        accountNumber,
-      } = req.body;
+      const { department, designation, salary, shift, bank, accountNumber } =
+        req.body;
       const employee_history = await Employee.findOneAndUpdate(
         { id: id },
         {
@@ -110,8 +104,6 @@ class EmployeeService {
             history: {
               department,
               designation,
-              StartDate,
-              EndDate,
               salary,
               shift,
               bank,
@@ -136,6 +128,7 @@ class EmployeeService {
       const allowedFields = {
         name: updatedData.name,
         joiningDate: updatedData.joiningDate,
+        EndDate: updatedData.EndDate,
         fathersName: updatedData.fathersName,
         cnic: updatedData.cnic,
         email: updatedData.email,
@@ -160,6 +153,20 @@ class EmployeeService {
       return updatedEmployee;
     } catch (error) {
       throw new Error(error);
+    }
+  }
+
+  async deleteEmployee(req) {
+    try {
+      const { id } = req.params;
+      const deletedEmployee = await Employee.findOneAndDelete({ id: id });
+      if (!deletedEmployee) {
+        throw new Error("Employee not found");
+      }
+      return deletedEmployee;
+    } catch (error) {
+      console.error("Error deleting employee:", error);
+      throw error;
     }
   }
 }
