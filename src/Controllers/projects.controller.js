@@ -45,4 +45,23 @@ const getProjects = async (req, res) => {
   }
 };
 
-module.exports = { submit, getProjects };
+const searchProject = async (req, res) => {
+  try {
+    const response = await projectService.searchProject(req);
+    if (response) {
+      return res.status(200).json({
+        success: true,
+        data: [response],
+        message: ["Projects searched successfully"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
+module.exports = { submit, getProjects, searchProject };

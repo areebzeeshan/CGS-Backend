@@ -21,7 +21,7 @@ class ProjectService {
 
       // Assuming attachments is an array of files, we will handle each file separately
       const attachments = req.file; // get the file from request
-      console.log("request......",req.file)
+      console.log("request......", req.file);
 
       const uploadedAttachmentUrl = await uploadOnCloudinary(attachments.path);
 
@@ -53,6 +53,16 @@ class ProjectService {
   async getProjects() {
     try {
       const response = await Project.find();
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async searchProject(req) {
+    try {
+      const { id } = req.params;
+      const response = await Project.findOne({ id: id });
       return response;
     } catch (error) {
       throw error;
