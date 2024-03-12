@@ -64,4 +64,29 @@ const searchProject = async (req, res) => {
   }
 };
 
-module.exports = { submit, getProjects, searchProject };
+const updateProject = async (req, res) => {
+  try {
+    const response = await projectService.updateProject(req);
+    if (response) {
+      return res.status(200).json({
+        success: true,
+        data: [response],
+        message: ["Project updated Successfully"],
+      });
+    }
+
+    return res.status(422).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
+module.exports = { submit, getProjects, searchProject, updateProject };

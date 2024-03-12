@@ -38,10 +38,9 @@ class ProjectService {
         amount,
         clientName,
         description,
-        attachments: uploadedAttachmentUrl, // Assign uploaded attachment URL
+        attachments: uploadedAttachmentUrl,
       });
 
-      // Save the project to the database
       await project.save();
 
       return project;
@@ -64,6 +63,51 @@ class ProjectService {
       const { id } = req.params;
       const response = await Project.findOne({ id: id });
       return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateProject(req) {
+    try {
+      const { id } = req.params;
+      const project = await Project.findOne({ id: id });
+
+      if (!project) {
+        throw new Error("Project not found");
+      }
+
+      // Update project fields if they exist in the request body
+      const fieldsToUpdate = [
+        "title",
+        "startDate",
+        "deleiveryDate",
+        "platform",
+        "department",
+        "nature",
+        "profile",
+        "salesPerson",
+        "amount",
+        "clientName",
+        "description",
+      ];
+      fieldsToUpdate.forEach((field) => {
+        if (req.body[field]) {
+          project[field] = req.body[field];
+        }
+      });
+
+      if (req.files && req.files.attachments) {
+        const attachments = req.files.attachments; 
+        const uploadedAttachmentUrl = await uploadOnCloudinary(
+          attachments.path
+        );
+        project.attachments = uploadedAttachmentUrl;
+      }
+
+      await project.save(); 
+
+      return project;
     } catch (error) {
       throw error;
     }

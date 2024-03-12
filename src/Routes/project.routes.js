@@ -11,4 +11,7 @@ router.get("/get", projectController.getProjects);
 // searching project by id
 router.get("/search/:id", projectController.searchProject);
 
+// updating project by id
+router.put("/update/:id", projectController.updateProject);
+
 module.exports = router;
