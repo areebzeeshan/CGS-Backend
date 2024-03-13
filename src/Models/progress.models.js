@@ -1,7 +1,6 @@
-// ProjectModel.js
 const mongoose = require("mongoose");
 
-const projectSchema = new mongoose.Schema({
+const progressSchema = new mongoose.Schema({
   id: { type: Number, required: true },
   title: { type: String, required: true },
   startDate: { type: String, required: true },
@@ -18,6 +17,6 @@ const projectSchema = new mongoose.Schema({
   attachments: { type: String },
 });
 
-const Project = mongoose.model("Project", projectSchema);
+const Progress = mongoose.model("Progress", progressSchema);
 
-module.exports = Project;
+module.exports = Progress;

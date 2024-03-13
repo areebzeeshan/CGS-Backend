@@ -8,10 +8,11 @@ class ProjectService {
         id,
         title,
         startDate,
-        deleiveryDate,
+        deliveryDate,
         platform,
         department,
         nature,
+        status,
         profile,
         salesPerson,
         amount,
@@ -29,10 +30,11 @@ class ProjectService {
         id,
         title,
         startDate,
-        deleiveryDate,
+        deliveryDate,
         platform,
         department,
         nature,
+        status,
         profile,
         salesPerson,
         amount,
@@ -106,6 +108,55 @@ class ProjectService {
       }
 
       await project.save(); 
+
+      return project;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async allotedSubmit(req) {
+    try {
+      const {
+        id,
+        title,
+        startDate,
+        deliveryDate,
+        platform,
+        department,
+        status,
+        nature,
+        profile,
+        salesPerson,
+        amount,
+        clientName,
+        description,
+      } = req.body;
+
+      // Assuming attachments is an array of files, we will handle each file separately
+      const attachments = req.file; // get the file from request
+      console.log("request......", req.file);
+
+      const uploadedAttachmentUrl = await uploadOnCloudinary(attachments.path);
+
+      const project = new Project({
+        id,
+        title,
+        startDate,
+        deliveryDate,
+        platform,
+        department,
+        status,
+        nature,
+        profile,
+        salesPerson,
+        amount,
+        clientName,
+        description,
+        attachments: uploadedAttachmentUrl,
+      });
+
+      await project.save();
 
       return project;
     } catch (error) {
