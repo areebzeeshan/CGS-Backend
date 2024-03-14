@@ -68,6 +68,54 @@ class AllotedService {
       throw error;
     }
   }
+
+  async updateAlloted(req) {
+    try {
+      const {
+        id,
+        title,
+        startDate,
+        deliveryDate,
+        platform,
+        department,
+        nature,
+        status,
+        profile,
+        salesPerson,
+        amount,
+        clientName,
+        description,
+      } = req.body;
+
+      const updatedData = {
+        title,
+        startDate,
+        deliveryDate,
+        platform,
+        department,
+        nature,
+        status,
+        profile,
+        salesPerson,
+        amount,
+        clientName,
+        description,
+      };
+
+      if (req.file) {
+        const uploadedAttachmentUrl = await uploadOnCloudinary(req.file.path);
+        updatedData.attachments = uploadedAttachmentUrl;
+      }
+
+      const response = await Alloted.findOneAndUpdate({ id: id }, updatedData, {
+        new: true,
+      });
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = AllotedService;

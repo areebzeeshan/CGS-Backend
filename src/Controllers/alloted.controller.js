@@ -64,4 +64,23 @@ const searchAlloted = async (req, res) => {
   }
 };
 
-module.exports = { submit, getAlloted, searchAlloted };
+const updateAlloted = async (req, res) => {
+  try {
+    const response = await allotedService.updateAlloted(req);
+    if (response) {
+      return res.status(200).json({
+        succes: 200,
+        data: [response],
+        message: ["Alloted updated successfully!"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
+module.exports = { submit, getAlloted, searchAlloted, updateAlloted };
