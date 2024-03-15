@@ -8,6 +8,6 @@ router.get("/get", allotedController.getAlloted)
 
 router.get("/search/:id", allotedController.searchAlloted)
 
-router.put("/update/:id", allotedController.updateAlloted)
+router.put("/update/:id", upload.single("attachments"), allotedController.updateAlloted)
 
 module.exports = router;

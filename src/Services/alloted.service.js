@@ -71,46 +71,19 @@ class AllotedService {
 
   async updateAlloted(req) {
     try {
-      const {
-        id,
-        title,
-        startDate,
-        deliveryDate,
-        platform,
-        department,
-        nature,
-        status,
-        profile,
-        salesPerson,
-        amount,
-        clientName,
-        description,
-      } = req.body;
+      const { id } = req.params;
 
-      const updatedData = {
-        title,
-        startDate,
-        deliveryDate,
-        platform,
-        department,
-        nature,
-        status,
-        profile,
-        salesPerson,
-        amount,
-        clientName,
-        description,
+      const updateData = {
+        ...req.body,
       };
 
       if (req.file) {
         const uploadedAttachmentUrl = await uploadOnCloudinary(req.file.path);
-        updatedData.attachments = uploadedAttachmentUrl;
+        updateData.attachments = uploadedAttachmentUrl;
       }
-
-      const response = await Alloted.findOneAndUpdate({ id: id }, updatedData, {
+      const response = await Alloted.findOneAndUpdate({ id: id }, updateData, {
         new: true,
       });
-
       return response;
     } catch (error) {
       throw error;

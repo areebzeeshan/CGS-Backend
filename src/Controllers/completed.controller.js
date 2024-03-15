@@ -6,14 +6,14 @@ const submit = async (req, res) => {
     const response = await completedService.submit(req);
     if (response) {
       return res.status(200).json({
-        succes: true,
+        success: true,
         data: [response],
         message: ["Completed submitted successfully!"],
       });
     }
 
     return res.status(422).json({
-      succes: false,
+      success: false,
       data: [],
       message: ["Something went wrong please try again!"],
     });
@@ -31,7 +31,7 @@ const getCompleted = async (req, res) => {
     const response = await completedService.getCompleted();
     if (response) {
       return res.status(200).json({
-        succes: 200,
+        success: 200,
         data: [response],
         message: ["Completed fetched successfully!"],
       });
@@ -50,7 +50,7 @@ const searchCompleted = async (req, res) => {
     const response = await completedService.searchCompleted(req);
     if (response) {
       return res.status(200).json({
-        succes: 200,
+        success: 200,
         data: [response],
         message: ["Completed searched successfully!"],
       });

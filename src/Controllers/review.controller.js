@@ -6,14 +6,14 @@ const submit = async (req, res) => {
     const response = await reviewService.submit(req);
     if (response) {
       return res.status(200).json({
-        succes: true,
+        success: true,
         data: [response],
         message: ["Review submitted successfully!"],
       });
     }
 
     return res.status(422).json({
-      succes: false,
+      success: false,
       data: [],
       message: ["Something went wrong please try again!"],
     });
@@ -31,7 +31,7 @@ const getReview = async (req, res) => {
     const response = await reviewService.getReview();
     if (response) {
       return res.status(200).json({
-        succes: 200,
+        success: 200,
         data: [response],
         message: ["Review fetched successfully!"],
       });
@@ -50,7 +50,7 @@ const searchReview = async (req, res) => {
     const response = await reviewService.searchReview(req);
     if (response) {
       return res.status(200).json({
-        succes: 200,
+        success: 200,
         data: [response],
         message: ["Review searched successfully!"],
       });

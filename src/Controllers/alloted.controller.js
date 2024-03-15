@@ -6,14 +6,14 @@ const submit = async (req, res) => {
     const response = await allotedService.submit(req);
     if (response) {
       return res.status(200).json({
-        succes: true,
+        success: true,
         data: [response],
         message: ["Alloted submitted successfully!"],
       });
     }
 
     return res.status(422).json({
-      succes: false,
+      success: false,
       data: [],
       message: ["Something went wrong please try again!"],
     });
@@ -31,7 +31,7 @@ const getAlloted = async (req, res) => {
     const response = await allotedService.getAlloted();
     if (response) {
       return res.status(200).json({
-        succes: 200,
+        success: true,
         data: [response],
         message: ["Alloted fetched successfully!"],
       });
@@ -50,7 +50,7 @@ const searchAlloted = async (req, res) => {
     const response = await allotedService.searchAlloted(req);
     if (response) {
       return res.status(200).json({
-        succes: 200,
+        success: true,
         data: [response],
         message: ["Alloted searched successfully!"],
       });
@@ -69,7 +69,7 @@ const updateAlloted = async (req, res) => {
     const response = await allotedService.updateAlloted(req);
     if (response) {
       return res.status(200).json({
-        succes: 200,
+        success: true,
         data: [response],
         message: ["Alloted updated successfully!"],
       });

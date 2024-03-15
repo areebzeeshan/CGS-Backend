@@ -6,14 +6,14 @@ const submit = async (req, res) => {
     const response = await progressService.submit(req);
     if (response) {
       return res.status(200).json({
-        succes: true,
+        success: true,
         data: [response],
         message: ["Progress submitted successfully!"],
       });
     }
 
     return res.status(422).json({
-      succes: false,
+      success: false,
       data: [],
       message: ["Something went wrong please try again!"],
     });
@@ -31,7 +31,7 @@ const getProgress = async (req, res) => {
     const response = await progressService.getProgress();
     if (response) {
       return res.status(200).json({
-        succes: 200,
+        success: 200,
         data: [response],
         message: ["Progress fetched successfully!"],
       });
@@ -50,7 +50,7 @@ const searchProgress = async (req, res) => {
     const response = await progressService.searchProgress(req);
     if (response) {
       return res.status(200).json({
-        succes: 200,
+        success: 200,
         data: [response],
         message: ["Progress searched successfully!"],
       });
