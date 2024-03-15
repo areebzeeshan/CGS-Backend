@@ -8,4 +8,6 @@ router.get("/get", completedController.getCompleted);
 
 router.get("/search/:id", completedController.searchCompleted);
 
+router.get("/update/:id", completedController.updateCompleted);
+
 module.exports = router;

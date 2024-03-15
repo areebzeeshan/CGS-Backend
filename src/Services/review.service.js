@@ -70,6 +70,27 @@ class ReviewService {
       throw error;
     }
   }
+
+  async updateReview(req) {
+    try {
+      const { id } = req.params;
+
+      const updateData = {
+        ...req.body,
+      };
+
+      if (req.file) {
+        const uploadedAttachmentUrl = await uploadOnCloudinary(req.file.path);
+        updateData.attachments = uploadedAttachmentUrl;
+      }
+      const response = await Review.findOneAndUpdate({ id: id }, updateData, {
+        new: true,
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = ReviewService;

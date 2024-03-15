@@ -8,4 +8,6 @@ router.get('/get', progressController.getProgress);
 
 router.get('/search/:id', progressController.searchProgress);
 
+router.get('/update/:id', progressController.updateProgress);
+
 module.exports = router;

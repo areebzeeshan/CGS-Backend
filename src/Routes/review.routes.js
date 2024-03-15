@@ -8,4 +8,6 @@ router.get("/get", reviewController.getReview);
 
 router.get("/search/:id", reviewController.searchReview);
 
+router.get("/update/:id", reviewController.updateReview);
+
 module.exports = router;

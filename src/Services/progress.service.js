@@ -68,6 +68,27 @@ class ProgressService {
       throw error;
     }
   }
+
+  async updateProgress(req) {
+    try {
+      const { id } = req.params;
+
+      const updateData = {
+        ...req.body,
+      };
+
+      if (req.file) {
+        const uploadedAttachmentUrl = await uploadOnCloudinary(req.file.path);
+        updateData.attachments = uploadedAttachmentUrl;
+      }
+      const response = await Progress.findOneAndUpdate({ id: id }, updateData, {
+        new: true,
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = ProgressService;

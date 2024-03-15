@@ -64,4 +64,23 @@ const searchProgress = async (req, res) => {
   }
 };
 
-module.exports = { submit, getProgress, searchProgress };
+const updateProgress = async (req, res) => {
+  try {
+    const response = await progressService.updateProgress(req);
+    if (response) {
+      return res.status(200).json({
+        success: 200,
+        data: [response],
+        message: ["Progress updated successfully!"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
+module.exports = { submit, getProgress, searchProgress, updateProgress };

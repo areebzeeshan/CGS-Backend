@@ -64,4 +64,23 @@ const searchReview = async (req, res) => {
   }
 };
 
-module.exports = { submit, getReview, searchReview };
+const updateReview = async (req, res) => {
+  try {
+    const response = await reviewService.updateReview(req);
+    if (response) {
+      return res.status(200).json({
+        success: 200,
+        data: [response],
+        message: ["Review updated successfully!"],
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: [],
+      message: [error.message],
+    });
+  }
+};
+
+module.exports = { submit, getReview, searchReview, updateReview };

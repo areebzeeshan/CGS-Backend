@@ -68,6 +68,27 @@ class CompletedService {
       throw error;
     }
   }
+
+  async updateCompleted(req) {
+    try {
+      const { id } = req.params;
+
+      const updateData = {
+        ...req.body,
+      };
+
+      if (req.file) {
+        const uploadedAttachmentUrl = await uploadOnCloudinary(req.file.path);
+        updateData.attachments = uploadedAttachmentUrl;
+      }
+      const response = await Completed.findOneAndUpdate({ id: id }, updateData, {
+        new: true,
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = CompletedService;
