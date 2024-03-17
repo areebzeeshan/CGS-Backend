@@ -78,38 +78,21 @@ class ProjectService {
       if (!project) {
         throw new Error("Project not found");
       }
+      let updateData = {
+        ...req.body,
+      };
 
-      // Update project fields if they exist in the request body
-      const fieldsToUpdate = [
-        "title",
-        "startDate",
-        "deleiveryDate",
-        "platform",
-        "department",
-        "nature",
-        "profile",
-        "salesPerson",
-        "amount",
-        "clientName",
-        "description",
-      ];
-      fieldsToUpdate.forEach((field) => {
-        if (req.body[field]) {
-          project[field] = req.body[field];
-        }
-      });
-
-      if (req.files && req.files.attachments) {
-        const attachments = req.files.attachments; 
-        const uploadedAttachmentUrl = await uploadOnCloudinary(
-          attachments.path
-        );
-        project.attachments = uploadedAttachmentUrl;
+      if (req.file) {
+        const uploadedAttachmentUrl = await uploadOnCloudinary(req.file.path);
+        updateData.attachments = uploadedAttachmentUrl;
       }
 
-      await project.save(); 
-
-      return project;
+      const updatedProject = await Project.findOneAndUpdate(
+        { id },
+        updateData,
+        { new: true }
+      );
+      return updatedProject;
     } catch (error) {
       throw error;
     }

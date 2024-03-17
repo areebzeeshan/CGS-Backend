@@ -12,7 +12,10 @@ router.get("/get", projectController.getProjects);
 router.get("/search/:id", projectController.searchProject);
 
 // updating project by id
-router.put("/update/:id", projectController.updateProject);
-
+router.put(
+  "/update/:id",
+  upload.single("attachments"),
+  projectController.updateProject
+);
 
 module.exports = router;
