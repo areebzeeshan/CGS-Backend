@@ -19,13 +19,13 @@ class ProjectService {
         clientName,
         description,
       } = req.body;
-
-      // Assuming attachments is an array of files, we will handle each file separately
-      const attachments = req.file; // get the file from request
-      console.log("request......", req.file);
-
-      const uploadedAttachmentUrl = await uploadOnCloudinary(attachments.path);
-
+  
+      let uploadedAttachmentUrl = null; // Initialize attachment URL as null
+  
+      if (req.file) {
+        uploadedAttachmentUrl = await uploadOnCloudinary(req.file.path);
+      }
+  
       const project = new Project({
         id,
         title,
@@ -42,9 +42,9 @@ class ProjectService {
         description,
         attachments: uploadedAttachmentUrl,
       });
-
+  
       await project.save();
-
+  
       return project;
     } catch (error) {
       throw error;
